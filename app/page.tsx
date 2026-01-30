@@ -1,3 +1,4 @@
+import Link from 'next/link'; // <--- 1. Import Link
 import { Lock, ArrowRight, Twitter, Github, Disc, Zap, ShieldCheck } from 'lucide-react';
 
 // --- 1. DEFINE THE ANIMATION STYLES HERE ---
@@ -11,13 +12,12 @@ const keyframesStyle = `
     100% { transform: perspective(1000px) rotateY(360deg); }
   }
 `;
-// -------------------------------------------
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-brand-bg selection:bg-brand-primary selection:text-white flex flex-col">
       
-      {/* --- 2. INJECT THE STYLES INTO THE PAGE --- */}
+      {/* --- INJECT STYLES --- */}
       <style>{keyframesStyle}</style>
       
       {/* --- HERO SECTION --- */}
@@ -51,12 +51,21 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="px-8 py-4 bg-brand-dark text-white rounded-2xl font-bold shadow-xl shadow-brand-dark/20 hover:transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+              {/* BUTTON 1: Go to Explore */}
+              <Link 
+                href="/explore"
+                className="px-8 py-4 bg-brand-dark text-white rounded-2xl font-bold shadow-xl shadow-brand-dark/20 hover:transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+              >
                 Start Exploring <ArrowRight size={18} />
-              </button>
-              <button className="px-8 py-4 bg-white text-brand-dark border-2 border-gray-100 rounded-2xl font-bold hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md">
+              </Link>
+
+              {/* BUTTON 2: Go to Login */}
+              <Link 
+                href="/login"
+                className="px-8 py-4 bg-white text-brand-dark border-2 border-gray-100 rounded-2xl font-bold hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md flex items-center justify-center"
+              >
                 Create a Drop
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -64,7 +73,7 @@ export default function Home() {
           <div className="relative hidden lg:block perspective-1000">
              <div 
                className="relative w-96 h-[500px] mx-auto bg-gradient-to-br from-gray-900 to-black rounded-3xl p-6 border border-gray-700 shadow-2xl shadow-brand-primary/30 group"
-               style={spinStyle} // <--- 3. APPLY THE ANIMATION HERE
+               style={spinStyle}
              >
                 <div className="h-full w-full border border-white/10 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
@@ -77,8 +86,8 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                     <h3 className="text-3xl font-bold text-white">Access Pass</h3>
-                     <p className="text-gray-400 text-sm">Valid Validation Key</p>
+                      <h3 className="text-3xl font-bold text-white">Access Pass</h3>
+                      <p className="text-gray-400 text-sm">Valid Validation Key</p>
                   </div>
                 </div>
              </div>
@@ -95,7 +104,9 @@ export default function Home() {
               <h2 className="text-4xl font-bold text-brand-dark tracking-tight">Trending Drops</h2>
               <p className="text-gray-400 mt-2 text-lg">Exclusive content dropping this week.</p>
             </div>
-            <button className="text-brand-primary font-bold hover:underline">View All &rarr;</button>
+            <Link href="/dashboard" className="text-brand-primary font-bold hover:underline">
+                View All &rarr;
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -147,10 +158,10 @@ export default function Home() {
             <div>
               <h4 className="text-white font-bold mb-4">Platform</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-brand-primary transition-colors">Explore Drops</a></li>
-                <li><a href="#" className="hover:text-brand-primary transition-colors">For Creators</a></li>
-                <li><a href="#" className="hover:text-brand-primary transition-colors">How it Works</a></li>
-                <li><a href="#" className="hover:text-brand-primary transition-colors">Pricing</a></li>
+                <li><Link href="/dashboard" className="hover:text-brand-primary transition-colors">Explore Drops</Link></li>
+                <li><Link href="/login" className="hover:text-brand-primary transition-colors">For Creators</Link></li>
+                <li><Link href="#" className="hover:text-brand-primary transition-colors">How it Works</Link></li>
+                <li><Link href="#" className="hover:text-brand-primary transition-colors">Pricing</Link></li>
               </ul>
             </div>
 
@@ -158,10 +169,10 @@ export default function Home() {
             <div>
               <h4 className="text-white font-bold mb-4">Resources</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-brand-primary transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-brand-primary transition-colors">Smart Contract</a></li>
-                <li><a href="#" className="hover:text-brand-primary transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-brand-primary transition-colors">Privacy Policy</a></li>
+                <li><Link href="#" className="hover:text-brand-primary transition-colors">Help Center</Link></li>
+                <li><Link href="#" className="hover:text-brand-primary transition-colors">Smart Contract</Link></li>
+                <li><Link href="#" className="hover:text-brand-primary transition-colors">Terms of Service</Link></li>
+                <li><Link href="#" className="hover:text-brand-primary transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
 
@@ -220,9 +231,12 @@ function FeaturedCard({ title, author, price, imgUrl }: any) {
             <span className="text-xs text-gray-400 uppercase font-bold">Price</span>
             <span className="text-brand-dark font-bold">{price}</span>
           </div>
-          <button className="px-4 py-2 bg-brand-dark text-white text-sm font-bold rounded-lg shadow-lg shadow-brand-dark/20 group-hover:bg-brand-accent group-hover:shadow-brand-accent/30 transition-all">
+          <Link 
+            href="/login" 
+            className="px-4 py-2 bg-brand-dark text-white text-sm font-bold rounded-lg shadow-lg shadow-brand-dark/20 group-hover:bg-brand-accent group-hover:shadow-brand-accent/30 transition-all"
+          >
             Mint Pass
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -270,9 +284,12 @@ function CreatorCallout() {
           </div>
         </div>
 
-        <button className="px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white rounded-full font-bold shadow-lg shadow-brand-secondary/25 hover:scale-105 transition-transform">
+        <Link 
+            href="/login"
+            className="px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white rounded-full font-bold shadow-lg shadow-brand-secondary/25 hover:scale-105 transition-transform inline-block"
+        >
           Start Creator Account
-        </button>
+        </Link>
       </div>
     </section>
   );
