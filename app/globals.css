@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- Brand Colors --- */
+  --color-brand-bg: #F8FAFC;
+  --color-brand-primary: #0EA5E9;
+  --color-brand-secondary: #9333EA;
+  --color-brand-accent: #EAB308;
+  --color-brand-dark: #0F172A;
+
+  /* --- Animations --- */
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+  --animate-gradient-x: gradientX 3s ease infinite;
+  --animate-spin-slow: spin 15s linear infinite;
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gradientX {
+    0%, 100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+}
